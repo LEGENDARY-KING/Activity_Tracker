@@ -1,7 +1,7 @@
 {
   "name": "Activity Tracker",
   "version": "1.0.0",
-  "description": "",
+  "description": "A basic but advanced activity tracker",
   "main": "server.js",
   "engines": {
     "node": "16.x"
