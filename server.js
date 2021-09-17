@@ -1,3 +1,5 @@
+// BRUH MY COMMITS WERE ALL CREDITED AS UNKNOWN, AMAZING SPIDER MAN
+
 const config=require("./config.json")
 const { MessageEmbed, Client, Intents,MessageActionRow,MessageButton  } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_PRESENCES,Intents.FLAGS.GUILD_MESSAGES ] });
