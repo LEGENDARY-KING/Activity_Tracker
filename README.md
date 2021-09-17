@@ -1,4 +1,4 @@
-# Activity_Tracker# Activity Tracker
+# Activity_Tracker
 [![Downloads](https://img.shields.io/github/downloads/LEGENDARY-KING/Activity_Tracker/total.svg)](https://github.com/LEGENDARY-KING/Activity_Tracker/releases/latest) [![Stars](https://img.shields.io/github/stars/jagrosh/LEGENDARY-KING/Activity_Tracker.svg)](https://github.com/LEGENDARY-KING/Activity_Tracker/stargazers) [![Release](https://img.shields.io/github/release/jagrosh/LEGENDARY-KING/Activity_Tracker.svg)](https://github.com/LEGENDARY-KING/Activity_Tracker/releases/latest) [![License](https://img.shields.io/github/license/LEGENDARY-KING/Activity_Tracker.svg)](https://github.com/LEGENDARY-KING/Activity_Tracker/blob/master/LICENSE) [![Discord](https://ptb.discord.com/api/guilds/729630070276096050/widget.png)](https://discord.gg/9e8UKUc)
 
 # Why did i make this
