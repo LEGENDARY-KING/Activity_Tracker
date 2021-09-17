@@ -36,5 +36,3 @@ Run the bot using
 node server.js 
 ```
 You can use a process manager like [pm2](https://pm2.keymetrics.io/) or [forever](https://www.npmjs.com/package/forever) for making sure it runs on restart and stuff
-
-
