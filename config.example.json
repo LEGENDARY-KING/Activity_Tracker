@@ -1,0 +1,7 @@
+{
+"token":"Your Token Here",
+"owner":"Your ID Here",
+"prefix":"!",
+"presence_id":"Application Presence ID Here",
+"guild":"Guild where track slash commands here"
+}
