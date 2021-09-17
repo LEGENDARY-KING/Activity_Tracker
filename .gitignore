@@ -4,3 +4,6 @@
 /database.sqlite
 /database.sqlite-shm
 /database.sqlite-wal
+/package-lock.json
+
+
