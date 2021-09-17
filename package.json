@@ -1,0 +1,32 @@
+{
+  "name": "Activity Tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "engines": {
+    "node": "16.x"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "prettier": "./node_modules/.bin/prettier --write ."
+  },
+  "dependencies": {
+    "@discordjs/builders": "^0.6.0",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "@google-cloud/dialogflow": "^2.0.0",
+    "apiai": "^4.0.3",
+    "axios": "^0.21.4",
+    "bad-words": "^3.0.3",
+    "better-sqlite3": "^7.4.3",
+    "common-tags": "^1.8.0",
+    "discord-buttons": "^4.0.0",
+    "discord.js": "^13.1.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "fs": "^0.0.2",
+    "ms": "^2.1.2",
+    "node-cron": "^2.0.3",
+    "node-fetch": "^2.6.0",
+    "cron": "^1.8.2"
+  }
+}
