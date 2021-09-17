@@ -249,6 +249,10 @@ client.on("messageCreate", async message => {
     .trim()
     .split(/ +/g);
   const command = args.shift().toLowerCase(); // Replaces the Current Prefix with this
+if(command=="applicationid")
+{
+message.channel.send(message.member.presence?.activities[0]?.applicationId||"You do not have an activity playing")
+}
   if (command == "eval") {
     try {
       const code = args.join(" ");

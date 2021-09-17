@@ -1,6 +1,6 @@
 **/.vs
 **/node_modiles
 /config.json
-/database-sqlite
+/database.sqlite
 /database.sqlite-shm
-database.sqlite-wal
+/database.sqlite-wal
