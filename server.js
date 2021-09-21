@@ -338,8 +338,7 @@ const event = new Date(Date.now());
 conf.playedToday+=sessionplayed
 
 var timeee=FromMillis(conf.dailyLimit-conf.playedToday,{long:true})+" left"
-if(conf.dailyLimit-conf.playedToday<0)timeee="overplayed by "+FromMillis(conf.playedToday-conf.dailyLimit,{long:true});
-
+    if (conf.dailyLimit - conf.playedToday < 0) timeee = "overplayed by " + FromMillis(conf.playedToday - conf.dailyLimit, { long: true }); overplaying[user.id] == false; //if spamming already then allow for more spam
 
 event.setHours(0)
 event.setSeconds(0)
@@ -376,8 +375,8 @@ console.log(e)
 //Function to reminder spam and check if still playing after max time
 async function overplay(user)
 {
-if(overplaying[user.id]==true)return //Already running on his account
-async function msg(){
+    if (overplaying[user.id] == true) return //Already running on this account
+    async function msg() {
 var conf=getData(user.id)
 if(user.presence?.activities[0]?.applicationId==config.presence_id)  //Still playing the application
 {
@@ -419,7 +418,7 @@ console.log(e)
 }
 else
 {
-overplaying[user.id]==false// stopped playing so change to false to allow for overplaying spam later
+overplaying[user.id]=false// stopped playing so change to false to allow for overplaying spam later
 }
 }
 msg()
