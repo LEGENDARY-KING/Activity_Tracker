@@ -338,7 +338,7 @@ const event = new Date(Date.now());
 conf.playedToday+=sessionplayed
 
 var timeee=FromMillis(conf.dailyLimit-conf.playedToday,{long:true})+" left"
-    if (conf.dailyLimit - conf.playedToday < 0) timeee = "overplayed by " + FromMillis(conf.playedToday - conf.dailyLimit, { long: true }); overplaying[user.id] == false; //if spamming already then allow for more spam
+    if (conf.dailyLimit - conf.playedToday < 0) timeee = "overplayed by " + FromMillis(conf.playedToday - conf.dailyLimit, { long: true }); overplaying[newp.user.id] == false; //if spamming already then allow for more spam
 
 event.setHours(0)
 event.setSeconds(0)
