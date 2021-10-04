@@ -278,7 +278,6 @@ var conf=getData(newp.user.id)
 if(conf.consent=="false")return //No consent for data recording
 let oldpact=oldp?.activities.find(a=>a.type=='PLAYING') // Find activity with type PLAYING
 let newpact=newp?.activities.find(a=>a.type=='PLAYING')
-console.log(oldpact,newpact)
 if(oldpact?.applicationId!=config.presence_id&&newpact?.applicationId!=config.presence_id)return // Non config presence ID return
 if(oldpact?.applicationId==newpact?.applicationId)return // Still playing the application 😠
 if(oldpact?.applicationId!=config.presence_id) //If started playing the application
