@@ -253,7 +253,8 @@ client.on("messageCreate", async message => {
   const command = args.shift().toLowerCase(); // Replaces the Current Prefix with this
 if(command=="applicationid")
 {
-message.channel.send(message.member.presence?.activities[0]?.applicationId||"You do not have an activity playing")
+let pAct=message.member.presence?.activities.find(a=>a.type=='PLAYING')
+message.channel.send(pAct||"You do not have an activity playing")
 }
   if (command == "eval") {
     try {
@@ -275,9 +276,12 @@ let temppresencea ={},temppresencer ={} //Temporary variable to store adding use
 client.on("presenceUpdate", async (oldp,newp) =>{
 var conf=getData(newp.user.id)
 if(conf.consent=="false")return //No consent for data recording
-if(oldp?.activities[0]?.applicationId!=config.presence_id&&newp?.activities[0]?.applicationId!=config.presence_id)return // Non genshin presence ID return
-if(oldp?.activities[0]?.applicationId==newp?.activities[0]?.applicationId)return // Still playing the application 😠
-if(oldp?.activities[0]?.applicationId!=config.presence_id) //If started playing the application
+let oldpact=oldp?.activities.find(a=>a.type=='PLAYING') // Find activity with type PLAYING
+let newpact=newp?.activities.find(a=>a.type=='PLAYING')
+console.log(oldpact,newpact)
+if(oldpact?.applicationId!=config.presence_id&&newpact?.applicationId!=config.presence_id)return // Non config presence ID return
+if(oldpact?.applicationId==newpact?.applicationId)return // Still playing the application 😠
+if(oldpact?.applicationId!=config.presence_id) //If started playing the application
 {
 
 if(temppresencea[newp.user.id]==true)return //Return if already triggerred in last 15 seconds
@@ -308,7 +312,7 @@ overplay(newp.member); //Start the reminder spam
 }
 /*On play message, Disabled because of QoL violation
 
-var embed=emb(`You have started playing **${newp.activities[0].name}** at <t:${(newp.activities[0].createdTimestamp/1000).toFixed(0)}:F> (<t:${(newp.activities[0].createdTimestamp/1000).toFixed(0)}:R>)
+var embed=emb(`You have started playing **${newpact.name}** at <t:${(newpact.timestamps.start/1000).toFixed(0)}:F> (<t:${(newpact.timestamps.start/1000).toFixed(0)}:R>)
 Bot has started counting your time and will notify when you reach the limit
 
 You have ${timeee} for today (Resets <t:${(Date.parse(event)/1000).toFixed(0)}:R>)`).setTitle("Started Game").setColor("RED").setTimestamp()
@@ -322,7 +326,7 @@ catch(e)
 console.log(e)
 }
 }
-if(newp?.activities[0]?.applicationId!=config.presence_id) //If stopped playing the application
+if(newpact?.applicationId!=config.presence_id) //If stopped playing the application
 {
 
 if(temppresencer[newp.user.id]==true)return//Return if already triggerred in last 15 seconds
@@ -331,7 +335,7 @@ setTimeout(()=>{
 delete temppresencer[newp.user.id]//Allow to retrigger after 15 seconds 
 },15*1000)
 
-var sessionplayed=Date.now()-oldp.activities[0].createdTimestamp
+var sessionplayed=Date.now()-oldpact?.timestamps.start
 
 const event = new Date(Date.now());
 
@@ -346,7 +350,7 @@ event.setMilliseconds(0)
 event.setMinutes(0) //Creating a 00:00:00 time for today
 
 if(!conf.config.data[Date.parse(event).toString()])conf.config.data[Date.parse(event).toString()]={times:[],totalPlayed:0} //Create a property with the name of milliseconds of the day for stats command(WIP)
-conf.config.data[Date.parse(event).toString()].times.push((oldp.activities[0].createdTimestamp/1000).toFixed(0)+"-"+(Date.now()/1000).toFixed(0))//Push into the array of the session start- session end time
+conf.config.data[Date.parse(event).toString()].times.push((oldpact?.timestamps.start/1000).toFixed(0)+"-"+(oldpact?.timestamps.end/1000).toFixed(0))//Push into the array of the session start- session end time
 let temp=conf
 temp.config=JSON.stringify(temp.config)
 clien.setData.run(temp)
@@ -355,12 +359,12 @@ event.setUTCDate(event.getUTCDate()+1);
 try
 {
 var d=Date.now()
-var embed=emb(`You have stopped playing **${oldp.activities[0].name}** at <t:${(d/1000).toFixed(0)}:F> (<t:${(d/1000).toFixed(0)}:R>)
+var embed=emb(`You have stopped playing **${oldpact.name}** at <t:${(d/1000).toFixed(0)}:F> (<t:${(d/1000).toFixed(0)}:R>)
 
 You have ${timeee} for today (Resets <t:${(Date.parse(event)/1000).toFixed(0)}:R>)
 
 **Session Information**`).setTitle("Stopped Game").setColor("GREEN").setTimestamp()
-.addField("Started Playing At","<t:"+(oldp.activities[0].createdTimestamp/1000).toFixed(0)+":F> (<t:"+(oldp.activities[0].createdTimestamp/1000).toFixed(0)+":R>)",true)
+.addField("Started Playing At","<t:"+(oldpact?.timestamps.start/1000).toFixed(0)+":F> (<t:"+(oldpact?.timestamps.start/1000).toFixed(0)+":R>)",true)
 .addField("Stopped Playing At","<t:"+(d/1000).toFixed(0)+":F> (<t:"+(d/1000).toFixed(0)+":R>)",true)
 .addField("Played For",FromMillis(sessionplayed))
 newp.user.send({embeds:[embed]})
@@ -378,9 +382,10 @@ async function overplay(user)
     if (overplaying[user.id] == true) return //Already running on this account
     async function msg() {
 var conf=getData(user.id)
-if(user.presence?.activities[0]?.applicationId==config.presence_id)  //Still playing the application
+let pAct=user.presence?.activities.find(a=>a.type=='PLAYING')
+if(pAct?.applicationId==config.presence_id)  //Still playing the application
 {
-var sessionplayed=Date.now()-user.presence.activities[0].createdTimestamp
+var sessionplayed=Date.now()-pAct.timestamps.start
 var timeleft=conf.dailyLimit-(conf.playedToday+sessionplayed)
 if(timeleft<0)
 {
