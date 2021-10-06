@@ -334,14 +334,11 @@ setTimeout(()=>{
 delete temppresencer[newp.user.id]//Allow to retrigger after 15 seconds 
 },15*1000)
 
-var sessionplayed=Date.now()-oldpact?.timestamps.start
 
 const event = new Date(Date.now());
 
+var sessionplayed=Date.now()-oldpact?.timestamps.start
 conf.playedToday+=sessionplayed
-
-var timeee=FromMillis(conf.dailyLimit-conf.playedToday,{long:true})+" left"
-    if (conf.dailyLimit - conf.playedToday < 0) timeee = "overplayed by " + FromMillis(conf.playedToday - conf.dailyLimit, { long: true }); overplaying[newp.user.id] = false; //if spamming already then allow for more spam
 
 event.setHours(0)
 event.setSeconds(0)
@@ -349,12 +346,27 @@ event.setMilliseconds(0)
 event.setMinutes(0) //Creating a 00:00:00 time for today
 
 if(!conf.config.data[Date.parse(event).toString()])conf.config.data[Date.parse(event).toString()]={times:[],totalPlayed:0} //Create a property with the name of milliseconds of the day for stats command(WIP)
-conf.config.data[Date.parse(event).toString()].times.push((oldpact?.timestamps.start/1000).toFixed(0)+"-"+(oldpact?.timestamps.end/1000).toFixed(0))//Push into the array of the session start- session end time
+var tempindex = conf.config.data[Date.parse(event).toString()].times.reverse().findIndex(f=>f.split("-")[0]==(oldpact?.timestamps.start/1000).toFixed(0)) // Check if for some reason the activity start time is already there and if there is continue from the end of the previous activity
+if(tempindex==-1)
+{
+conf.config.data[Date.parse(event).toString()].times.push((oldpact?.timestamps.start/1000).toFixed(0)+"-"+(Date.now()/1000).toFixed(0))//Push into the array of the session start- session end time
+}
+else
+{
+var end=conf.config.data[Date.parse(event).toString()].times[tempindex].split("-")[1]//Make the ending time of the previous activity start time of this
+conf.playedToday-=end*1000-oldpact?.timestamps.start //Remove the previous time
+sessionplayed-=end*1000-oldpact?.timestamps.start //Remove the previous time
+conf.config.data[Date.parse(event).toString()].times.push(end+"-"+(Date.now()/1000).toFixed(0)) //Previous end time to current time
+}
+var timeee=FromMillis(conf.dailyLimit-conf.playedToday,{long:true})+" left"
+    if (conf.dailyLimit - conf.playedToday < 0) timeee = "overplayed by " + FromMillis(conf.playedToday - conf.dailyLimit, { long: true }); overplaying[newp.user.id] = false; //if spamming already then allow for more spam
+
+
 let temp=conf
 temp.config=JSON.stringify(temp.config)
 clien.setData.run(temp)
 
-event.setUTCDate(event.getUTCDate()+1);
+event.setUTCDate(event.getUTCDate()+1);//changing day to the next day
 try
 {
 var d=Date.now()
@@ -389,11 +401,20 @@ var timeleft=conf.dailyLimit-(conf.playedToday+sessionplayed)
 if(timeleft<0)
 {
 const event = new Date(Date.now());
-event.setUTCDate(event.getUTCDate()+1);
-event.setHours(0)
-event.setSeconds(0)
-event.setMilliseconds(0)
-event.setMinutes(0)         //Creating a 00:00:00 time for the next day
+event.setHours(0);
+event.setSeconds(0);
+event.setMilliseconds(0);
+event.setMinutes(0);         //Creating a 00:00:00 time for today
+
+var tempindex = conf.config?.data[Date.parse(event).toString()]?.times.reverse().findIndex(f=>f.split("-")[0]==(pAct?.timestamps.start/1000).toFixed(0)) // Check if for some reason the activity start time is already there from end and if there is continue from the end of the previous activity
+if(tempindex>-1)
+{
+var end=conf.config.data[Date.parse(event).toString()].times[tempindex].split("-")[1]//Make the ending time of the previous activity start time of this
+timeleft+=(end*1000-pAct?.timestamps.start)
+conf.config.data[Date.parse(event).toString()].times.push(end+"-"+(Date.now()/1000).toFixed(0)) //Previous end time to current time
+}
+
+event.setUTCDate(event.getUTCDate()+1);//changing to next day
 
 let embed=emb(`You have been overplaying this game for ${FromMillis(timeleft*-1)}
 Please stop playing for today
@@ -501,7 +522,7 @@ clien.setData.run(temp)
 else
 {
 var user=client.users.cache.get(a.user)
-a.config.data[Date.parse(event).toString()].totalPlayed=a.todayPlayed
+a.config.data[Date.parse(event).toString()].totalPlayed=a.playedToday
 var allsessions=a.config.data[Date.parse(event).toString()].times.map(f=>{
 var from=f.split("-")[0]
 var to=f.split("-")[1]
