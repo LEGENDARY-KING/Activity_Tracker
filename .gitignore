@@ -1,5 +1,5 @@
 **/.vs
-**/node_modiles
+**/node_modules
 /config.json
 /database.sqlite
 /database.sqlite-shm
