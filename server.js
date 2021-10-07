@@ -522,6 +522,7 @@ clien.setData.run(temp)
 else
 {
 var user=client.users.cache.get(a.user)
+if(!a.config.data[Date.parse(event).toString()])a.config.data[Date.parse(event).toString()]={times:[],totalPlayed:1}
 a.config.data[Date.parse(event).toString()].totalPlayed=a.playedToday
 var allsessions=a.config.data[Date.parse(event).toString()].times.map(f=>{
 var from=f.split("-")[0]
