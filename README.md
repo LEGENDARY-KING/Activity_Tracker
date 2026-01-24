@@ -61,8 +61,8 @@ Contributions are always welcome, whether it's finding and fixing bugs, adding n
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](https://github.com/LEGENDARY-KING/Activity_Tracker/blob/main/LICENSE) file for details.
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](https://github.com/aarush-salgania/Activity_Tracker/blob/main/LICENSE) file for details.
 
 ## Author
 
-- [LEGENDARY KING](https://github.com/LEGENDARY-KING) - Author
+- [Aarush Salgania](https://github.com/aarush-salgania) - Author
