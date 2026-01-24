@@ -1,6 +1,6 @@
 # Activity Tracker
 
-[![Downloads](https://img.shields.io/github/downloads/LEGENDARY-KING/Activity_Tracker/total.svg)](https://github.com/LEGENDARY-KING/Activity_Tracker/releases/latest) [![Stars](https://img.shields.io/github/stars/jagrosh/LEGENDARY-KING/Activity_Tracker.svg)](https://github.com/LEGENDARY-KING/Activity_Tracker/stargazers) [![Release](https://img.shields.io/github/release/jagrosh/LEGENDARY-KING/Activity_Tracker.svg)](https://github.com/LEGENDARY-KING/Activity_Tracker/releases/latest) [![License](https://img.shields.io/github/license/LEGENDARY-KING/Activity_Tracker.svg)](https://github.com/LEGENDARY-KING/Activity_Tracker/blob/master/LICENSE) [![Discord](https://ptb.discord.com/api/guilds/729630070276096050/widget.png)](https://discord.gg/9e8UKUc)
+[![Downloads](https://img.shields.io/github/downloads/aarush-salgania/Activity_Tracker/total.svg)](https://github.com/aarush-salgania/Activity_Tracker/releases/latest) [![Stars](https://img.shields.io/github/stars/jagrosh/aarush-salgania/Activity_Tracker.svg)](https://github.com/aarush-salgania/Activity_Tracker/stargazers) [![Release](https://img.shields.io/github/release/jagrosh/aarush-salgania/Activity_Tracker.svg)](https://github.com/aarush-salgania/Activity_Tracker/releases/latest) [![License](https://img.shields.io/github/license/aarush-salgania/Activity_Tracker.svg)](https://github.com/aarush-salgania/Activity_Tracker/blob/master/LICENSE)
 
 ## Table of Contents
 - [Overview](#overview)
@@ -28,7 +28,7 @@ The Activity Tracker is a bot that tracks your presence in Discord and provides 
 ## Installation
 To install the Activity Tracker, follow these steps:
 
-1. Clone the repository to your local machine using `git clone https://github.com/LEGENDARY-KING/Activity_Tracker.git`
+1. Clone the repository to your local machine using `git clone https://github.com/aarush-salgania/Activity_Tracker.git`
 2. Install the required dependencies by running `npm install`
 
 ## Configuration
